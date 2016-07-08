@@ -86,8 +86,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     templateUrl:'templates/pai-lishi.html',
     controller:'paiLishiCtrl'
   })
-
-
+  .state('shiguchuli',{
+    url: '/shiguchuli',
+    templateUrl: 'templates/shiguchuli.html',
+    controller: 'shiguchuliCtrl'
+  })
 
 
   // setup an abstract state for the tabs directive

@@ -127,4 +127,8 @@ angular.module('starter.controllers', ['angular-carousel'])
   
 })
 
+.controller('shiguchuliCtrl', function($scope){
+  
+})
+
 
