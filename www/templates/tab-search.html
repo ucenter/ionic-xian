@@ -1,0 +1,28 @@
+<ion-view name='tab-search' title='信息查询'>
+	<ion-content class='padding'>
+		<div class="button-bar">
+			<button ng-click='toggle($event,tab1)' class="button icon-left ion-person" ng-class='{act: tab1}'>驾驶员信息查询</button>
+			<button ng-click='toggle($event,tab2)' class="button icon-left ion-model-s" ng-class='{act: tab2}'>车辆信息查询</button>
+		</div>
+		<div class="grid" ng-show='tab1'>
+			<form ng-submit='driverForm'>
+				<div class="input-group">
+					<input type="text" placeholder='驾驶员号码'>
+					<input type="text" placeholder='驾驶证档案编号'>
+					<button type="submit" class='button button-block button-positive'>查询</button>	
+				</div>
+			</form>
+		</div>
+
+		<div class="grid" ng-show='tab2'>
+			<form ng-submit='carForm'>
+				<div class="input-group">
+					<input type="text" placeholder='车牌号'>
+					<input type="text" placeholder='发动机号'>
+					<input type="text" placeholder='车架号'>
+					<button class='button button-block button-positive' type='submit'>查询</button>
+				</div>
+			</form>
+		</div>
+	</ion-content>
+</ion-view>

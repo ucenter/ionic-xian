@@ -1,0 +1,60 @@
+<ion-view view-title="首页">
+  <ion-content class="">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="slide">
+      <ul rn-carousel rn-carousel-auto-slide rn-carousel-controls-allow-loop class="image">
+        <li ng-repeat="item in slides">
+          <div  class="layer">
+            <img ng-src="{{item.img}}" alt=""/>
+          </div>        
+        </li>
+        <div class='carouselIndex' rn-carousel-indicators ng-if="slides.length > 1" slides="slides" rn-carousel-index="carouselIndex"></div>
+      </ul>
+    </div>
+
+    <div class="row padding0">
+      <div class="col">
+        <div href="#" class='button block button-balanced'>出行提示</div>
+      </div>
+      <div class="col">
+        <div href="#" class='button block button-calm'>天气预报</div>
+      </div>
+    </div>
+
+      <div class="row padding0">
+        <div class='col'><i class="icon-volume-up"></i>交通通告：lat:{{lat}} &nbsp; long:{{long}}</div>
+      </div>
+    <div class="grid">
+      <div class="gridView">
+        <a class="item-2">
+          <img src="img/PNG/hand-paper-o.png" alt="">
+          <h5>事故处理</h5>
+        </a>
+        <a href='#/paihome' nav-direction="forward" class="item-2">
+          <img src="img/PNG/camera.png" alt="">
+          <h5>随手拍</h5>
+        </a>
+      </div>
+      <div class="gridView">
+        <a href='#/kshhome' nav-direction="forward" class="item-3">
+          <!-- <i class="icon-tv"></i><p>可视化</p> -->
+          <img src="img/PNG/television.png" alt="">
+          <h5>可视化</h5>
+        </a>
+        <a href='#/xunchahome' class="item-3">
+          <!-- <i class="icon-cloud"></i><p>网络巡查</p> -->
+          <img src="img/PNG/cloud.png" alt="">
+          <h5>网络巡查</h5>
+        </a>
+        <a href='#' class="item-3">
+          <!-- <i class="icon-share-square-o"></i><p>区域互动</p> -->
+          <img src="img/PNG/share-square-o.png" alt="">
+          <h5>区域互动</h5>
+        </a>
+      </div>
+    </div>
+
+    
+  </ion-content>
+</ion-view>

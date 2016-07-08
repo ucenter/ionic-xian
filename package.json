@@ -1,0 +1,83 @@
+{
+  "name": "ionic-xian",
+  "version": "1.1.1",
+  "description": "ionic-xian: An Ionic project",
+  "dependencies": {
+    "gulp": "^3.5.6",
+    "gulp-sass": "^2.0.4",
+    "gulp-concat": "^2.2.0",
+    "gulp-minify-css": "^0.3.0",
+    "gulp-rename": "^1.2.0"
+  },
+  "devDependencies": {
+    "bower": "^1.3.3",
+    "gulp-util": "^2.2.14",
+    "shelljs": "^0.3.0"
+  },
+  "cordovaPlugins": [
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-statusbar",
+    "ionic-plugin-keyboard",
+    {
+      "locator": "https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git",
+      "id": "cordova-plugin-actionsheet"
+    },
+    {
+      "locator": "https://github.com/VitaliiBlagodir/cordova-plugin-datepicker.git",
+      "id": "cordova-plugin-datepicker"
+    },
+    "cordova-plugin-camera",
+    "cordova-plugin-media-capture",
+    "cordova-plugin-dialogs",
+    "cordova-plugin-file",
+    "cordova-plugin-device-orientation",
+    {
+      "locator": "https://github.com/phonegap/phonegap-plugin-barcodescanner.git",
+      "id": "phonegap-plugin-barcodescanner"
+    },
+    "cordova-plugin-file-transfer",
+    {
+      "locator": "https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin.git",
+      "id": "cordova-plugin-flashlight"
+    },
+    "cordova-plugin-geolocation",
+    {
+      "locator": "https://github.com/wymsee/cordova-imagePicker.git",
+      "id": "cordova-plugin-image-picker"
+    },
+    "cordova-plugin-inappbrowser",
+    {
+      "locator": "https://github.com/vstirbu/InstagramPlugin.git",
+      "id": "cordova-instagram-plugin"
+    },
+    "uk.co.workingedge.phonegap.plugin.launchnavigator",
+    "cordova-plugin-media",
+    {
+      "locator": "https://github.com/SidneyS/cordova-plugin-nativeaudio.git",
+      "id": "cordova-plugin-nativeaudio"
+    },
+    "cordova-plugin-network-information",
+    {
+      "locator": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
+      "id": "cordova-plugin-x-toast"
+    },
+    "cordova-plugin-vibration",
+    "cordova-plugin-geolocation-baidu",
+    {
+      "variables": {
+        "API_KEY": "YVgPXDXmb1ANdov9xXxFWvg3"
+      },
+      "locator": "https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git",
+      "id": "cordova-plugin-baidu-geolocation"
+    }
+  ],
+  "cordovaPlatforms": [
+    {
+      "platform": "android",
+      "locator": "browser"
+    }
+  ]
+}
