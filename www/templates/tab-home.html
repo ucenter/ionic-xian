@@ -17,20 +17,27 @@
       <div class="col">
         <div class='button block button-balanced weather'>
           <img src="img/PNG/calendar.png" alt="">
-          <div class="info">
-            <p><span ng-if='pub'>{{pub.date.date}}，{{pub.date.weekday}}</span></p>
-            <p><span ng-if='pub'>{{pub.date.lunar}} ，{{pub.date.lunarYear}}</span></p>
+          <div class="info" ng-if='pub.date'>
+            <p>
+              <span>{{pub.date.date}}，{{pub.date.weekday}}</span>
+            </p>
+            <p>
+              <span>{{pub.date.lunar}} ，{{pub.date.lunarYear}}</span>             
+            </p>
           </div>
+          <div class="info" ng-else><p>数据加载</p></div>
         </div>
       </div>
       <div class="col">
         <div class='button block button-calm weather'>
           <img src="img/day/08.png" alt="">
-          <div class='info'>
-            <p>
-              <span ng-if='pub'>{{pub.weather.realtime.info}}，{{pub.weather.realtime.temperature}}&deg;C </span></p>
-            <p><span ng-if='pub'>{{pub.weather.life.info.xiche[0]}}洗车</span></p>
+          <div class='info' ng-if='pub.weather'>
+            <p><span>{{pub.weather.realtime.weather.info}}，{{pub.weather.realtime.weather.temperature}}&deg;C </span>
+            </p>
+            <p><span>{{pub.weather.life.info.xiche[0]}}洗车</span>
+            </p>
           </div>
+          <div class="info" ng-else><p>数据加载</p></div>
         </div>
       </div>
     </div>
