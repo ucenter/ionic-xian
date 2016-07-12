@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['angular-carousel'])
 
-.controller('homeCtrl', function($scope,$state) {
+.controller('homeCtrl', function($scope) {
     $scope.slides = [
         {'img': './img/slide-1.jpg'},
         {'img': './img/slide-2.jpg'}
@@ -10,6 +10,7 @@ angular.module('starter.controllers', ['angular-carousel'])
         $scope.$broadcast('scroll.refreshComplete');
       })
     }      
+
 })
 
 .controller('listCtrl', function($scope, Chats) {

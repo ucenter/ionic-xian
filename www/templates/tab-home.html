@@ -15,19 +15,32 @@
 
     <div class="row padding0">
       <div class="col">
-        <div href="#" class='button block button-balanced'>出行提示</div>
+        <div class='button block button-balanced weather'>
+          <img src="img/PNG/calendar.png" alt="">
+          <div class="info">
+            <p><span ng-if='pub'>{{pub.date.date}}，{{pub.date.weekday}}</span></p>
+            <p><span ng-if='pub'>{{pub.date.lunar}} ，{{pub.date.lunarYear}}</span></p>
+          </div>
+        </div>
       </div>
       <div class="col">
-        <div href="#" class='button block button-calm'>天气预报</div>
+        <div class='button block button-calm weather'>
+          <img src="img/day/08.png" alt="">
+          <div class='info'>
+            <p>
+              <span ng-if='pub'>{{pub.weather.realtime.info}}，{{pub.weather.realtime.temperature}}&deg;C </span></p>
+            <p><span ng-if='pub'>{{pub.weather.life.info.xiche[0]}}洗车</span></p>
+          </div>
+        </div>
       </div>
     </div>
 
       <div class="row padding0">
-        <div class='col'><i class="icon-volume-up"></i>交通通告：lat:{{lat}} &nbsp; long:{{long}}</div>
+        <div class='col'><i class="icon-volume-up"></i>交通通告：</div>
       </div>
     <div class="grid">
       <div class="gridView">
-        <a href='#/shiguchuli' class="item-2">
+        <a ng-href='#/shiguchuli' class="item-2">
           <img src="img/PNG/hand-paper-o.png" alt="">
           <h5>事故处理</h5>
         </a>

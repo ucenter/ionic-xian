@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova'])
 
-.run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading) {
+.run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading,pub) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -34,6 +34,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     $rootScope.myGoBack = function() {
         $ionicHistory.goBack();
     };  
+
+    //全局变量
+    $rootScope.pub = {};
+    pub.getLocation().then(function(location){
+      //百度API获取城市
+      console.log(location)
+      $rootScope.pub.location = location.data.content.address;
+      $rootScope.pub.city_code = location.data.content.address_detail.city_code;
+      //根据城市获取天气信息
+      return pub.getWeather($rootScope.pub.location)      
+    },function(err){
+      return false;
+    }).then(function(weather){
+      console.log(weather)
+      $rootScope.pub.weather = weather.data.result.data;
+      return pub.getDate();
+    }).then(function(date){
+      console.log(date)
+      $rootScope.pub.date = date.data.result.data;
+    })
+
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {

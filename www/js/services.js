@@ -47,4 +47,31 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+
+.factory('pub', ['$http', function($http){
+  var apistoreAK = '502ba87e0b35e4b4d86fc449e837de07';
+  var juheweather = '01aa68e8fb57cc7fe3a053098ae93dc3';
+  var juhewnl = '86cdad675224aee6017fa600da2bf62c';
+  var date = new Date();
+  var myDate = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate();
+  return {
+    getWeather:function(cityname){
+      // return $http({
+      //   method:'get',
+      //   url:'http://apis.baidu.com/apistore/weatherservice/weather?citypinyin='+cityname,
+      //   headers:{
+      //     apikey: apistoreAK
+      //   }
+      // })
+      return $http.get('http://op.juhe.cn/onebox/weather/query?cityname='+cityname+'&key='+juheweather)
+    },
+    getLocation: function(){
+      return $http.get('http://api.map.baidu.com/location/ip?ak=485a9e87c98054c55b50404385e10ed1')      
+    },
+    getDate: function(){
+      return $http.get('http://japi.juhe.cn/calendar/day?date='+myDate+'&key='+juhewnl);
+    }
+
+  }
+}])  
