@@ -130,7 +130,12 @@ div.rn-carousel-indicator span.active{color:#fff}
     width: 56px;height: 56px;border-radius: 50%;margin-top: 40px;clear: both;
 }
 
-.weather{font-size: 10px;height: 50px;}
+.weather{font-size: 10px;height: 50px;position: relative;overflow: hidden;}
 .weather p{margin: 0;line-height: 20px;}
-.weather img{padding: 5px; margin-top: 4px;border-radius: 20px;background-color: #A5D1EA;width: 40px;height: 40px;float: left;}
-.weather div.info{margin: 4px 0 0 10px;float: left;text-align: left;}
+.weather img{
+    padding: 5px;margin-top: 4px; float: left;
+    border-radius: 20px;background-color: #A5D1EA;width: 40px;height: 40px;
+}
+.weather div.info{
+    text-align: left;position: absolute;left: 60px;top:4px;
+}

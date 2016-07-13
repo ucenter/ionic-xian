@@ -5,21 +5,21 @@
 			<button ng-click='toggle($event,tab2)' class="button icon-left ion-model-s" ng-class='{act: tab2}'>车辆信息查询</button>
 		</div>
 		<div class="grid" ng-show='tab1'>
-			<form ng-submit='driverForm'>
+			<form name='drv' ng-submit='driverForm()'>
 				<div class="input-group">
-					<input type="text" placeholder='驾驶员号码'>
-					<input type="text" placeholder='驾驶证档案编号'>
+					<input type="text" placeholder='驾驶员号码' name='drvNum' ng-model='drvNum'>
+					<input type="text" placeholder='驾驶证档案编号' name='drvDaNum' ng-model='drvDaNum'>
 					<button type="submit" class='button button-block button-positive'>查询</button>	
 				</div>
 			</form>
 		</div>
 
 		<div class="grid" ng-show='tab2'>
-			<form ng-submit='carForm'>
+			<form name='car' ng-submit='carForm()'>
 				<div class="input-group">
-					<input type="text" placeholder='车牌号'>
-					<input type="text" placeholder='发动机号'>
-					<input type="text" placeholder='车架号'>
+					<input type="text" placeholder='车牌号' name='carNum' ng-model='carNum'>
+					<input type="text" placeholder='发动机号' name='carEgNum' ng-model='carEgNum'>
+					<input type="text" placeholder='车架号' name='carCjNum' ng-model='carCjNum'>
 					<button class='button button-block button-positive' type='submit'>查询</button>
 				</div>
 			</form>

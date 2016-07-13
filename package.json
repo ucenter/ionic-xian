@@ -72,6 +72,10 @@
       },
       "locator": "https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git",
       "id": "cordova-plugin-baidu-geolocation"
+    },
+    {
+      "locator": "https://github.com/Telerik-Verified-Plugins/NativePageTransitions#0.6.2",
+      "id": "com.telerik.plugins.nativepagetransitions"
     }
   ],
   "cordovaPlatforms": [
