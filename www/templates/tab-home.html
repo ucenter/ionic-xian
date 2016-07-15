@@ -1,7 +1,5 @@
 <ion-view view-title="首页">
   <ion-content class="">
-    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
-    </ion-refresher>
     <div class="slide">
       <ul rn-carousel rn-carousel-auto-slide rn-carousel-controls-allow-loop class="image">
         <li ng-repeat="item in slides">
@@ -30,9 +28,13 @@
       </div>
       <div class="col">
         <div class='button block button-calm weather'>
-          <img src="img/day/08.png" alt="">
+          <img ng-src="img/day/{{pub.weather.realtime.weather.img}}.png" alt="">
           <div class='info' ng-if='pub.weather'>
-            <p><span>{{pub.weather.realtime.weather.info}}，{{pub.weather.realtime.weather.temperature}}&deg;C </span>
+            <p><span>
+              {{pub.weather.realtime.city_name}}&nbsp;
+              {{pub.weather.realtime.weather.info}}，
+              {{pub.weather.realtime.weather.temperature}}&deg;C 
+            </span>
             </p>
             <p><span>{{pub.weather.life.info.xiche[0]}}洗车</span>
             </p>
@@ -47,7 +49,7 @@
       </div>
     <div class="grid">
       <div class="gridView">
-        <a ng-href='#/shiguchuli' class="item-2">
+        <a href='#/shiguchuli' nav-direction="forward" class="item-2">
           <img src="img/PNG/hand-paper-o.png" alt="">
           <h5>事故处理</h5>
         </a>

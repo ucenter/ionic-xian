@@ -1,16 +1,16 @@
-angular.module('starter.controllers', ['angular-carousel'])
+angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 
-.controller('homeCtrl', function($scope) {
+.controller('homeCtrl', function($scope,$state,$cordovaDialogs) {
     $scope.slides = [
         {'img': './img/slide-1.jpg'},
         {'img': './img/slide-2.jpg'}
     ]
-    $scope.doRefresh = function(){
-      $state.reload().then(function(){
-        $scope.$broadcast('scroll.refreshComplete');
-      })
-    }      
-
+    // $scope.doRefresh = function(){
+    //   $state.reload().then(function(){
+    //     $scope.$broadcast('scroll.refreshComplete');
+    //   })
+    // }      
+  
 })
 
 .controller('listCtrl', function($scope, Chats) {
@@ -36,7 +36,7 @@ angular.module('starter.controllers', ['angular-carousel'])
 
 })
 
-.controller('searchCtrl', function($scope,$ionicModal){
+.controller('searchCtrl', function($scope,$timeout,$ionicLoading,ionicToast){
     $scope.tab1 = true;
     $scope.tab2 = false;
     $scope.toggle = function(event,id){
@@ -51,45 +51,52 @@ angular.module('starter.controllers', ['angular-carousel'])
             $scope.tab1 = true;
             $scope.tab2 = false;
         }
-    }
-    
-    $ionicModal.fromTemplateUrl('modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-    $scope.openModal = function() {
-      $scope.modal.show();
-    };
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-    };
-    // Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function() {
-      // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function() {
-      // Execute action
-    });
+    }   
 
 
-    $scope.driver;
+    //$scope.drv;
     $scope.car;
     //驾驶员信息查询表单
     $scope.driverForm = function(){
       console.log(this.drvNum,this.drvDaNum);
-      $scope.driver = this.drvNum;
-      $scope.openModal();
+      if (this.drvNum == undefined && this.drvDaNum == undefined) {
+        ionicToast.show('查询项不能为空', 'middle', false, 2500)
+        return false;
+      }else{
+        $ionicLoading.show({template: '查询中...'});
+        $timeout(function(){
+          $ionicLoading.hide();
+          $scope.drvName = '张震';
+          $scope.drvSex = '男';
+          $scope.drvNation = '中国';
+          $scope.drvBirth = '1976-08-14';
+          $scope.drvFirstdate = '1996-08';
+          $scope.drvAllow = 'A2D';
+          $scope.drvExp = '2020-08-14';
+        },500)        
+      }
+      
     } 
 
     $scope.carForm = function(){
       console.log(this.carNum,this.carEgNum,this.carCjNum)
+      if(this.carNum == undefined && this.carEgNum == undefined && this.carCjNum == undefined){
+        ionicToast.show('查询项不能为空', 'middle', false, 2500)
+        return false;
+      }else{
+        $ionicLoading.show({template: '查询中...'});
+        $timeout(function(){
+            $ionicLoading.hide().then(function(){
+              $scope.carOwner = '张震';
+              $scope.carModel = '普通小型客车';
+              $scope.carFirstdate = '2013-08-11';
+              $scope.carNum = '京A88888';
+              $scope.carEgnum = '00000000';
+              $scope.carKnownum = 'LFXXX000000000';
+              $scope.carStatus = '有效';
+            })
+        },500)
+      }
     } 
 })
 
@@ -168,8 +175,9 @@ angular.module('starter.controllers', ['angular-carousel'])
   
 })
 
-.controller('shiguchuliCtrl', function($scope){
-  
+//事故处理
+.controller('shiguchuliCtrl', function($scope,$state){
+
 })
 
 

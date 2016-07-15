@@ -33,7 +33,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     $rootScope.myGoBack = function() {
         $ionicHistory.goBack();
-    };  
+    };
+
 
     //全局变量
     $rootScope.pub = {};

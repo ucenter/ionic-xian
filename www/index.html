@@ -6,6 +6,7 @@
     <title>西安交警</title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/ionic-toast.css">
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -22,6 +23,7 @@
     <script src='./lib/angular-carousel/angular-touch.js'></script>
     <script src='./lib/angular-carousel/angular-carousel.min.js'></script>   
     <script src='./lib/ui-bootstrap-1.3.3.js'></script>
+    <script src='./lib/ionic-toast.js'></script>
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
@@ -41,30 +43,6 @@
       have templates inline in this html file if you'd like).
     -->
     <ion-nav-view></ion-nav-view>
-
-    <script id="driver.html" type="text/ng-template">
-      <ion-modal-view>
-        <ion-header-bar class='bar-positive'>
-          <button class="button button-clear ion-chevron-left" ng-click="closeModal()"></button>
-          <h1 class="title">驾驶员信息查询结果</h1>
-        </ion-header-bar>
-        <ion-content>
-          {{driver}}
-        </ion-content>
-      </ion-modal-view>
-    </script>
-
-    <script id="car.html" type="text/ng-template">
-      <ion-modal-view>
-        <ion-header-bar class='bar-positive'>
-          <button class="button button-clear ion-chevron-left" ng-click="closeModal()"></button>
-          <h1 class="title">车辆信息查询结果</h1>
-        </ion-header-bar>
-        <ion-content>
-          {{car}}
-        </ion-content>
-      </ion-modal-view>
-    </script>
 
   </body>
 </html>
