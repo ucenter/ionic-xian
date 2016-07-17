@@ -157,8 +157,51 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 }])
 
 //随手拍-一键上传
-.controller('paiShangchuanCtrl', ['$scope', function($scope){
-  
+.controller('paiShangchuanCtrl', ['$scope','$rootScope', function($scope,$rootScope){
+
+  $scope.address = $rootScope.location;
+  $scope.remoteTime = new Date();
+  $scope.cars = [
+    {name:'小型车辆'},
+    {name:'中型车辆'}
+  ]
+  $scope.choiceCar = $scope.cars[0];
+  $scope.weifa = ['违法停车','主干道蹭停','占用高速应急车道','变道加塞','闯红灯','开车用手机','占用公交道','违反标志标线','滥用远光灯'];
+
+  //日期控件
+  var weekDaysList = ["日", "一", "二", "三", "四", "五", "六"];
+  var monthList = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+  var datePickerCallback = function (val) {
+      if (typeof(val) === 'undefined') {
+          console.log('No date selected');
+      } else {
+          console.log('Selected date is : ', val);
+          $scope.datepickerObject.inputDate = val;
+      }
+  };
+  //日期空间配置
+  $scope.datepickerObject = {
+      titleLabel: '日期选择',  //Optional
+      todayLabel: '今天',  //Optional
+      closeLabel: '取消',  //Optional
+      setLabel: '确定',  //Optional
+      setButtonType: 'button-calm',  //Optional
+      todayButtonType: 'button-calm',  //Optional
+      closeButtonType: 'button-calm',  //Optional
+      inputDate: new Date(),    //Optional
+      mondayFirst: false,    //Optional
+      //disabledDates: disabledDates, //Optional
+      weekDaysList: weekDaysList,   //Optional
+      monthList: monthList, //Optional
+      templateType: 'modal', //Optional
+      modalHeaderColor: 'bar-calm', //Optional
+      modalFooterColor: 'bar-calm', //Optional
+      from: new Date(),   //Optional
+      to: new Date(2018, 12, 31), //Optional
+      callback: function (val) {    //Mandatory
+          datePickerCallback(val);
+      }
+  };    
 }])
 
 //随手拍-历史举报
@@ -180,4 +223,11 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 
 })
 
+.controller('sgclsCtrl', function($scope,$state){
+  
+})
+
+.controller('sgclmCtrl', function($scope,$state){
+  
+})
 

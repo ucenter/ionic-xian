@@ -1,12 +1,19 @@
 /* Empty. Add your own CSS if you like */
 a{color: #333;text-decoration: none;}
+a.link{}
 img{max-width: 100%;height: auto;}
 .padding0{padding: 0;}
 .text-center{text-align: center;}
-
+.fr{float: right;}
 .tab-title{font-size: 14px;}
 .item-input{padding: 6px 6px 5px 16px;}
+.label{line-height: 1.5em;}
+input.input{border: 1px solid #ccc;border-radius: 3px;width: 100%;margin: 4px 0;padding: 8px;}
+select.select{width: 100%;padding: 8px;margin: 4px 0;border-radius: 3px;}
 input[type=range]{width:300px}
+
+.button-group .button{margin-right: 10px;margin-bottom: 10px;}
+
 ul[rn-carousel]{overflow:hidden;padding:0;white-space:nowrap;position:relative;-webkit-perspective:1000px;-ms-perspective:1000px;perspective:1000px;-ms-touch-action:pan-y;touch-action:pan-y}
 ul[rn-carousel]>li{
 	color:#000;
@@ -139,3 +146,9 @@ div.rn-carousel-indicator span.active{color:#fff}
 .weather div.info{
     text-align: left;position: absolute;left: 60px;top:4px;
 }
+
+
+
+/*一键上传*/
+.uppic{padding: 10px 0;}
+.uppic img{padding: 10px;background-color: #ccc;border-radius: 5px;margin-right: 10px;}

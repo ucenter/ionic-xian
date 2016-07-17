@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker'])
 
 .run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading,pub) {
     $ionicPlatform.ready(function() {
@@ -55,6 +55,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       console.log(date)
       $rootScope.pub.date = date.data.result.data;
     })
+
+
+    $rootScope.location = '东大桥山水铂宫';
 
 })
 
@@ -113,7 +116,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     templateUrl: 'templates/shiguchuli.html',
     controller: 'shiguchuliCtrl'
   })
-
+  .state('sgcls',{
+    url: '/sgcls',
+    templateUrl: 'templates/shiguchuli-single.html',
+    controller: 'sgclsCtrl'
+  })
+  .state('sgclm',{
+    url: '/sgclm',
+    templateUrl: 'templates/shiguchuli-multi.html',
+    controller: 'sgclmCtrl'
+  })
 
   // setup an abstract state for the tabs directive
     .state('tab', {

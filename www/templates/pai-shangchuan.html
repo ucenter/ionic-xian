@@ -7,6 +7,39 @@
   <h1 class="title">一键上传</h1>
 </ion-header-bar>
 	<ion-content>
-		<img src="img/banner.jpg" alt="">
+		<!-- <img src="img/banner.jpg" alt=""> -->
+		<div class="padding">
+			<label class='label' for="">上传时间</label>
+			<input class='input' type="datetime-local" ng-model='remoteTime'>
+			<div class="list noborder">
+				<div class="item item-avatar">
+					<img src="img/PNG/location-arrow.png" alt="">
+					<h2>上报位置<a href="#" class='fr positive'>自动定位</a></h2>
+					<p>{{location}}</p>
+				</div>
+			</div>
+		</div>
+		<app-map style="height:300px;margin:10px;" address="{{address}}"></app-map>
+		<div class="padding">
+			<label class='label'>违法车辆号牌种类（必选）</label>
+			<select name="" class='select'
+					ng-options='car.name for car in cars' 
+					ng-model='choiceCar'
+					></select>
+			<label class='label'>违法车辆车牌号码（必选）</label>
+			<input type="text" class='input' placeholder='请输入违法车辆车牌号码'>
+			<label class="label">违法行为（必选）</label>
+			<div class='button-group'>
+				<span class="button button-small button-stable" ng-repeat='item in weifa'>{{item}}</span>
+			</div>
+			<label class='label'>其他违法行为</label>
+			<input type="text" class='input' placeholder='请描述其他违法行为'>
+			<label class='label'>上传照片</label>
+			<div class='uppic'>
+				<img ng-src="img/PNG/cab.png" alt="">
+				<img ng-src="img/PNG/cab.png" alt="">
+				<img ng-src="img/PNG/cab.png" alt="">
+			</div>
+		</div>
 	</ion-content>
 </ion-view>
