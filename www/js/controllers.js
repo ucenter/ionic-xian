@@ -13,6 +13,12 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
   
 })
 
+
+
+
+
+
+
 .controller('listCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -28,13 +34,35 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
   };
 })
 
+
+
+
+
+
+
+
 .controller('listDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
+
+
+
+
+
+
+
 .controller('AccountCtrl', function($scope) {
 
 })
+
+
+
+
+
+
+
+
 
 .controller('searchCtrl', function($scope,$timeout,$ionicLoading,ionicToast){
     $scope.tab1 = true;
@@ -100,18 +128,38 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
     } 
 })
 
-.controller('loginCtrl', ['$scope', function($scope){
+
+
+
+
+
+//登录
+.controller('loginCtrl', function($scope,$interval){
     $scope.codetext = '获取验证码';
     $scope.getCode = function(){
-
+      var mobile = $scope.mobile;
     }
 
-}])
+    $scope.changeTime = function(){
+      $interval(function(){},1000)
+    }
+
+})
+
+
+
+
+
 
 //随手拍
 .controller('paiHomeCtrl', function($scope){
 
 })
+
+
+
+
+
 
 //随手拍-交警巡查
 .controller('paiXunchaCtrl', ['$scope','$cordovaCamera', function($scope,$cordovaCamera){
@@ -151,16 +199,31 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
   
 }])
 
+
+
+
+
+
+
+
+
 //随手拍-违法举报
 .controller('paiJubaoCtrl', ['$scope', function($scope){
   
 }])
 
+
+
+
+
+
+
 //随手拍-一键上传
-.controller('paiShangchuanCtrl', ['$scope','$rootScope', function($scope,$rootScope){
+.controller('paiShangchuanCtrl', function($scope,$rootScope,$timeout){
 
   $scope.address = $rootScope.location;
-  $scope.remoteTime = new Date();
+  $scope.remoteTime = new Date();     
+
   $scope.cars = [
     {name:'小型车辆'},
     {name:'中型车辆'}
@@ -202,32 +265,255 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
           datePickerCallback(val);
       }
   };    
-}])
+})
+
+
+
+
+
 
 //随手拍-历史举报
 .controller('paiLishiCtrl',function($scope){
 
 })
 
+
+
+
+
+
 //可视化
 .controller('kshHomeCtrl',function($scope){
 
 })
 
+
+
+
+
+
 .controller('xunchaHomeCtrl', function($scope){
   
 })
+
+
+
+
 
 //事故处理
 .controller('shiguchuliCtrl', function($scope,$state){
 
 })
 
-.controller('sgclsCtrl', function($scope,$state){
-  
+
+
+//单车事故处理
+.controller('sgclsCtrl', function($scope,$state,$ionicPopup,$ionicLoading,$timeout,$cordovaCamera,ionicToast){
+    $scope.img = {
+        "cqf": "img/cqf.png",
+        "chf": "img/chf.png",
+        "pzbw": "img/pzbw.png",
+        "qt": "img/qt.png"          
+    }
+    var info = [
+      {text:'清晰反应出车牌号车辆之间位置关系及车辆与标线的位置关系'},
+      {text:'从体现碰撞部位的角度来拍摄本车全景'},
+      {text:'根据事故现场具体情况，拍摄能反应事故现场及事故本身的其他照片'}
+    ]    
+     $scope.showAlert = function(id) {
+       var alertPopup = $ionicPopup.alert({
+         title: '温馨提示',
+         template: info[id].text
+       });
+     };
+
+     $scope.submit = function(){
+         var confirmPopup = $ionicPopup.confirm({
+           title: '确定提交吗？',
+           template: '提交的信息将上传到系统中'
+         });
+
+         confirmPopup.then(function(res) {
+           if(res) {
+              $ionicLoading.show({template: '请稍后...'});
+              $timeout(function(){
+                  $scope.img = {
+                    "cqf": "img/cqf.png",
+                    "chf": "img/chf.png",
+                    "pzbw": "img/pzbw.png",
+                    "qt": "img/qt.png"
+                  }      
+              },500).then(function(){
+                ionicToast.show('信息已经保存到服务器', 'middle', false, 2500)
+                $ionicLoading.hide();               
+              })
+           } else {
+              // ionicToast.show('取消保存', 'middle', false, 2500)
+           }
+         });       
+     }
+
+     $scope.getpic = function($event,img){
+        console.log(img)
+        document.addEventListener("deviceready", function () {
+          var options = {
+            quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 158,
+            targetHeight: 120,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false,
+            correctOrientation:true
+          };
+
+          $cordovaCamera.getPicture(options).then(function(imageData) {
+            //var image = document.getElementById('myImage');            
+            //image.src = "data:image/jpeg;base64," + imageData;
+            switch(img){
+              case 'cqf':
+                $scope.img.cqf = "data:image/jpeg;base64," + imageData;
+                break;
+              case 'chf':
+                $scope.img.chf = "data:image/jpeg;base64," + imageData;
+                break;                            
+              case 'pzbw':
+                $scope.img.pzbw = "data:image/jpeg;base64," + imageData;
+                break;              
+              case 'qt':
+                $scope.img.qt = "data:image/jpeg;base64," + imageData;
+                break;              
+            }
+          }, function(err) {
+            // error
+          });
+        }, false);
+      
+     }
+
+
 })
 
-.controller('sgclmCtrl', function($scope,$state){
-  
+
+
+
+
+// 多车事故处理
+.controller('sgclmCtrl', function($scope,$state,$ionicPopup,$ionicLoading,$timeout,$cordovaCamera,ionicToast){
+
+    $scope.reload = function(){
+      $ionicLoading.show({template: '请稍后...'});
+      $timeout(function(){
+        $state.reload();        
+      },500).then(function(){
+        $ionicLoading.hide();
+      })
+    }    
+    // $scope.img = [
+    //   {cqf: "img/cqf.png"},
+    //   {chf: "img/chf.png"},
+    //   {bcf: "img/bcf.png"},
+    //   {dfc: "img/dfc.png"},
+    //   {pzbw: "img/pzbw.png"},
+    //   {qt: "img/qt.png"}
+    // ];
+    $scope.img = {
+      "cqf": "img/cqf.png",
+      "chf": "img/chf.png",
+      "bcf": "img/bcf.png",
+      "dfc": "img/dfc.png",
+      "pzbw": "img/pzbw.png",
+      "qt": "img/qt.png"
+    }
+
+    var info = [
+      {text:'清晰反应出车牌号车辆之间位置关系及车辆与标线的位置关系'},
+      {text:'从体现碰撞部位的角度来拍摄本车全景'},
+      {text:'根据事故现场具体情况，拍摄能反应事故现场及事故本身的其他照片'}
+    ]
+
+     $scope.showAlert = function(id) {
+       var alertPopup = $ionicPopup.alert({
+         title: '温馨提示',
+         template: info[id].text
+       });
+     };
+
+     $scope.submit = function(){
+         var confirmPopup = $ionicPopup.confirm({
+           title: '确定提交吗？',
+           template: '提交的信息将上传到系统中'
+         });
+
+         confirmPopup.then(function(res) {
+           if(res) {
+              $ionicLoading.show({template: '请稍后...'});
+              $timeout(function(){
+                  $scope.img = {
+                    "cqf": "img/cqf.png",
+                    "chf": "img/chf.png",
+                    "bcf": "img/bcf.png",
+                    "dfc": "img/dfc.png",
+                    "pzbw": "img/pzbw.png",
+                    "qt": "img/qt.png"
+                  }      
+              },500).then(function(){
+                ionicToast.show('信息已经保存到服务器', 'middle', false, 2500)
+                $ionicLoading.hide();               
+              })
+           } else {
+              // ionicToast.show('取消保存', 'middle', false, 2500)
+           }
+         });       
+     }
+
+     $scope.getpic = function($event,img){
+        console.log(img)
+        document.addEventListener("deviceready", function () {
+          var options = {
+            quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 158,
+            targetHeight: 120,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false,
+            correctOrientation:true
+          };
+
+          $cordovaCamera.getPicture(options).then(function(imageData) {
+            //var image = document.getElementById('myImage');            
+            //image.src = "data:image/jpeg;base64," + imageData;
+            switch(img){
+              case 'cqf':
+                $scope.img.cqf = "data:image/jpeg;base64," + imageData;
+                break;
+              case 'chf':
+                $scope.img.chf = "data:image/jpeg;base64," + imageData;
+                break;              
+              case 'bcf':
+                $scope.img.bcf = "data:image/jpeg;base64," + imageData;
+                break;              
+              case 'dfc':
+                $scope.img.dfc = "data:image/jpeg;base64," + imageData;
+                break;              
+              case 'pzbw':
+                $scope.img.pzbw = "data:image/jpeg;base64," + imageData;
+                break;              
+              case 'qt':
+                $scope.img.qt = "data:image/jpeg;base64," + imageData;
+                break;              
+            }
+          }, function(err) {
+            // error
+          });
+        }, false);
+      
+     }
+
 })
 

@@ -7,7 +7,9 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker'])
 
-.run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading,pub) {
+.run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading,$ionicActionSheet,
+  $timeout,$cordovaAppVersion,$ionicPopup,$cordovaFileTransfer,$cordovaFile,$cordovaFileOpener2,
+  pub) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -36,7 +38,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     };
 
 
-    //全局变量
+    //全局变量，1.百度网络获取城市 2.根据城市获取天气，3.获取日期
     $rootScope.pub = {};
     pub.getLocation().then(function(location){
       //百度API获取城市
@@ -56,9 +58,74 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       $rootScope.pub.date = date.data.result.data;
     })
 
-
+    //全局位置信息
     $rootScope.location = '东大桥山水铂宫';
 
+
+    checkUpdate();
+
+    // 检查更新
+    function checkUpdate() {
+        var serverAppVersion = "1.0.0"; //从服务端获取最新版本
+        //获取版本
+        document.addEventListener('deviceready',function(){
+          $cordovaAppVersion.getVersionCode().then(function (version) {
+              //如果本地于服务端的APP版本不符合
+              if (version != serverAppVersion) {
+                  showUpdateConfirm();
+              }
+          });          
+        })
+    }
+
+    // 显示是否更新对话框
+    function showUpdateConfirm() {
+        var confirmPopup = $ionicPopup.confirm({
+            title: '版本升级',
+            template: '1.xxxx;</br>2.xxxxxx;</br>3.xxxxxx;</br>4.xxxxxx', //从服务端获取更新的内容
+            cancelText: '取消',
+            okText: '升级'
+        });
+        confirmPopup.then(function (res) {
+            if (res) {
+                $ionicLoading.show({
+                    template: "已经下载：0%"
+                });
+                var url = "http://demo.simovision.cn/"; //可以从服务端获取更新APP的路径
+                var targetPath = "file:///storage/sdcard0/Download/1.apk"; //APP下载存放的路径，可以使用cordova file插件进行相关配置
+                var trustHosts = true
+                var options = {};
+                
+                $cordovaFileTransfer.download(url, targetPath, options, trustHosts).then(function (result) {
+                    // 打开下载下来的APP
+                    $cordovaFileOpener2.open(targetPath, 'application/vnd.android.package-archive'
+                    ).then(function () {
+                            // 成功
+                        }, function (err) {
+                            // 错误
+                        });
+                    $ionicLoading.hide();
+                }, function (err) {
+                    alert('下载失败');
+                }, function (progress) {
+                    //进度，这里使用文字显示下载百分比
+                    $timeout(function () {
+                        var downloadProgress = (progress.loaded / progress.total) * 100;
+                        $ionicLoading.show({
+                            template: "已经下载：" + Math.floor(downloadProgress) + "%"
+                        });
+                        if (downloadProgress > 99) {
+                            $ionicLoading.hide();
+                        }
+                    })
+                });
+            } else {
+                // 取消更新
+            }
+        });
+    }
+
+//end run
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {

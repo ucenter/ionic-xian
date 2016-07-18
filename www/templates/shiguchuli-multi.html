@@ -1,11 +1,67 @@
-<ion-view >
+<ion-view class='shiguchuli'>
 	<ion-header-bar align-title="center" class="bar-positive">
 		<div class="buttons">
 			<button class="button button-clear ion-chevron-left" ng-click="myGoBack()"></button>
 		</div>
 		<h1 class="title">多车事故</h1>
+		<button class="button button-clear ion-refresh" ng-click='reload()'></button>
 	</ion-header-bar>
-	<ion-content class='padding'>
-
+	<ion-content class='padding has-footer'>
+		<div class="row">
+			<div class="col assertive">
+				<p>请您在保证自身安全情况下，点击以下图例并在拍照</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="imgbox">
+					<img ng-src='{{img.cqf}}' alt="" ng-click='getpic($event,"cqf")'>					
+				</div>
+				<h5>侧前方
+					<span class='btn positive' ng-click='showAlert(0)'><i class='icon ion-ios-help-outline'></i></span></h5>
+			</div>
+			<div class="col">
+				<div class="imgbox">
+					<img ng-src='{{img.chf}}' alt="" ng-click='getpic($event,"chf")'>					
+				</div>
+				<h5>侧后方
+					<span class='btn positive' ng-click='showAlert(0)'><i class='icon ion-ios-help-outline'></i></span></h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="imgbox">
+					<img ng-src='{{img.bcf}}' alt="" ng-click='getpic($event,"bcf")'>					
+				</div>
+				<h5>本方车全景
+					<span class='btn positive' ng-click='showAlert(1)'><i class='icon ion-ios-help-outline'></i></span></h5>
+			</div>
+			<div class="col">
+				<div class="imgbox">
+					<img ng-src='{{img.dfc}}' alt="" ng-click='getpic($event,"dfc")'>					
+				</div>
+				<h5>对方车全景
+					<span class='btn positive' ng-click='showAlert(1)'><i class='icon ion-ios-help-outline'></i></span></h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="imgbox">
+					<img ng-src='{{img.pzbw}}' alt="" ng-click='getpic($event,"pzbw")'>					
+				</div>
+				<h5>碰撞部位
+					<span class='btn positive' ng-click='showAlert(2)'><i class='icon ion-ios-help-outline'></i></span></h5>
+			</div>
+			<div class="col">
+				<div class="imgbox">
+					<img ng-src='{{img.qt}}'alt="" ng-click='getpic($event,"qt")'>					
+				</div>
+				<h5>其他现场照片
+					<span class='btn positive' ng-click='showAlert(2)'><i class='icon ion-ios-help-outline'></i></span></h5>
+			</div>
+		</div>
 	</ion-content>
+	<ion-footer-bar align-title="center" class="bar-stable bar-btn">
+	  	<button ng-click='submit()' class="button button-block button-positive">拍照完成</button>
+	</ion-footer-bar>
 </ion-view>

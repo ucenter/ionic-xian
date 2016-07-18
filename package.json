@@ -76,6 +76,14 @@
     {
       "locator": "https://github.com/Telerik-Verified-Plugins/NativePageTransitions#0.6.2",
       "id": "com.telerik.plugins.nativepagetransitions"
+    },
+    {
+      "locator": "https://github.com/whiteoctober/cordova-plugin-app-version.git",
+      "id": "cordova-plugin-app-version"
+    },
+    {
+      "locator": "https://github.com/pwlin/cordova-plugin-file-opener2.git",
+      "id": "cordova-plugin-file-opener2"
     }
   ],
   "cordovaPlatforms": [
