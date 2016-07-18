@@ -152,3 +152,16 @@ div.rn-carousel-indicator span.active{color:#fff}
 /*一键上传*/
 .uppic{padding: 10px 0;}
 .uppic img{padding: 10px;background-color: #ccc;border-radius: 5px;margin-right: 10px;}
+
+
+/*事故处理*/
+.shiguchuli .scroll-content{background-color: #F5F5F5;}
+.shiguchuli .row{background-color: #F5F5F5;}
+.shiguchuli .row .col .imgbox{padding:0 10px;overflow: hidden;}
+.shiguchuli .row .col img{float: left;}
+.shiguchuli .row .col h5{text-align: center;font-weight: 800;margin-top: 4px;}
+.shiguchuli .row .col h5 .btn{margin-left: 10px;}
+.shiguchuli .row .col h5 .btn .icon{font-size: 20px;}
+
+.bar-btn{height: 50px;}
+.bar-btn .button{margin-top: 4px;}
