@@ -227,6 +227,7 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
   $scope.position = function(){
 
   }
+  
   $scope.cars = [
     {name:'小型车辆'},
     {name:'中型车辆'},
