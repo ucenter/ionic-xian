@@ -221,29 +221,15 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 //随手拍-一键上传
 .controller('paiShangchuanCtrl', function($scope,$rootScope,$timeout){
 
-  //$scope.address = $rootScope.location;
-  $scope.address = '山水铂宫';
+  $scope.address = $rootScope.location;
   $scope.remoteTime = new Date();     
-  $scope.position = function(){
 
-  }
   $scope.cars = [
     {name:'小型车辆'},
-    {name:'中型车辆'},
-    {name:'大型车辆'}
+    {name:'中型车辆'}
   ]
   $scope.choiceCar = $scope.cars[0];
-  $scope.weifa = [
-      {checked:false,code:1,name:'违法停车'},
-      {checked:false,code:2,name:'主干道蹭停'},
-      {checked:false,code:3,name:'占用高速应急车道'},
-      {checked:false,code:4,name:'变道加塞'},
-      {checked:false,code:5,name:'闯红灯'},
-      {checked:false,code:6,name:'开车用手机'},
-      {checked:false,code:7,name:'占用公交道'},
-      {checked:false,code:8,name:'违反标志标线'},
-      {checked:false,code:9,name:'滥用远光灯'}
-  ];
+  $scope.weifa = ['违法停车','主干道蹭停','占用高速应急车道','变道加塞','闯红灯','开车用手机','占用公交道','违反标志标线','滥用远光灯'];
 
   //日期控件
   var weekDaysList = ["日", "一", "二", "三", "四", "五", "六"];

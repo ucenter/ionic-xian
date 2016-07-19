@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker'])
 
-.run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading,$ionicActionSheet,$cordovaGeolocation,
+.run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading,$ionicActionSheet,
   $timeout,$cordovaAppVersion,$ionicPopup,$cordovaFileTransfer,$cordovaFile,$cordovaFileOpener2,
   pub) {
     $ionicPlatform.ready(function() {
@@ -60,26 +60,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     //全局位置信息
     $rootScope.location = '东大桥山水铂宫';
-    var posOptions = {timeout: 10000, enableHighAccuracy: false};
-    $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
-        var lat  = position.coords.latitude
-        var long = position.coords.longitude
-      }, function(err) {
-        // error
-    });
-    var watchOptions = {
-      timeout : 3000,
-      enableHighAccuracy: false // may cause errors if true
-    };
 
-    var watch = $cordovaGeolocation.watchPosition(watchOptions);
-    watch.then(null,function(err) {
-        // error
-      },function(position) {
-        var lat  = position.coords.latitude
-        var long = position.coords.longitude
-    });
-    watch.clearWatch();
 
     checkUpdate();
 
