@@ -219,14 +219,13 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 
 
 //随手拍-一键上传
-.controller('paiShangchuanCtrl', function($scope,$rootScope,$timeout){
+.controller('paiShangchuanCtrl', function($scope,$state,$rootScope,$timeout,$cordovaToast){
 
-  //$scope.address = $rootScope.location;
   $scope.address = '山水铂宫';
   $scope.remoteTime = new Date();     
-  $scope.position = function(){
-
-  }
+  
+  
+  //$cordovaToast.show($rootScope.posLong+','+$rootScope.posLat, 'long', 'center')
   
   $scope.cars = [
     {name:'小型车辆'},

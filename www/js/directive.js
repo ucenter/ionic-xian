@@ -21,6 +21,8 @@ angular.module('starter')
       map = new BMap.Map("allMap");
       //map.addControl(new BMap.ZoomControl());
 
+      //var point = new BMap.Point(116.331398,39.897445);
+
       //导航控件
       var navigationControl = new BMap.NavigationControl({
         // 靠左上角位置
@@ -39,6 +41,10 @@ angular.module('starter')
         if (point) {
           map.centerAndZoom(point, 16);
           map.addOverlay(new BMap.Marker(point));
+          function showInfo(e){
+            alert(e.point.lng + ", " + e.point.lat);
+          }
+          map.addEventListener("click", showInfo);
         }
       }, "");
     }

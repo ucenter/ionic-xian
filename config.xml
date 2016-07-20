@@ -43,4 +43,5 @@
     <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git">
         <variable name="API_KEY" value="YVgPXDXmb1ANdov9xXxFWvg3" />
     </plugin>
+
 </widget>

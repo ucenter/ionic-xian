@@ -7,8 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova','ionic-datepicker'])
 
-.run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading,$ionicActionSheet,$cordovaGeolocation,
-  $timeout,$cordovaAppVersion,$ionicPopup,$cordovaFileTransfer,$cordovaFile,$cordovaFileOpener2,
+.run(function($ionicPlatform,$rootScope,$ionicHistory,$ionicLoading,$ionicActionSheet,$cordovaGeolocation,$state,
+  $timeout,$cordovaAppVersion,$ionicPopup,$cordovaFileTransfer,$cordovaFile,$cordovaFileOpener2,$cordovaToast,
   pub) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -64,28 +64,37 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
         var lat  = position.coords.latitude
         var long = position.coords.longitude
+        //$cordovaToast.show(lat+','+long, 'long', 'bottom')
+        $rootScope.posLat = lat;
+        $rootScope.posLong = long;
+        console.log(position)
       }, function(err) {
         // error
+        $cordovaToast.show(JSON.stringify(err), 'short', 'bottom')
     });
     var watchOptions = {
       timeout : 3000,
       enableHighAccuracy: false // may cause errors if true
     };
-
     var watch = $cordovaGeolocation.watchPosition(watchOptions);
     watch.then(null,function(err) {
         // error
+        $cordovaToast.show(JSON.stringify(err),'short','bottom')
       },function(position) {
         var lat  = position.coords.latitude
         var long = position.coords.longitude
+        //$cordovaToast.showLongBottom(lat,long)
+        console.log(position,'watch-lat:'+lat,'watch-long:'+long)
     });
-    watch.clearWatch();
+    //watch.clearWatch();
+
+
 
     checkUpdate();
 
     // 检查更新
     function checkUpdate() {
-        var serverAppVersion = "1.0.0"; //从服务端获取最新版本
+        var serverAppVersion = "0.0.3"; //从服务端获取最新版本
         //获取版本
         document.addEventListener('deviceready',function(){
           $cordovaAppVersion.getVersionCode().then(function (version) {
@@ -101,7 +110,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     function showUpdateConfirm() {
         var confirmPopup = $ionicPopup.confirm({
             title: '版本升级',
-            template: '1.xxxx;</br>2.xxxxxx;</br>3.xxxxxx;</br>4.xxxxxx', //从服务端获取更新的内容
+            template: '', //从服务端获取更新的内容
             cancelText: '取消',
             okText: '升级'
         });
