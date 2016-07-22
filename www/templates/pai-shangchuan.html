@@ -14,8 +14,8 @@
 			<div class="list noborder">
 				<div class="item item-avatar">
 					<img src="img/PNG/location-arrow.png" alt="">
-					<h2>上报位置<a ng-click='position()' class='fr positive'>自动定位</a></h2>
-					<p>{{location}},{{posLat}},{{posLong}}</p>
+					<h2>上报位置<span ng-click='getGps()' class='fr positive'>自动定位</span></h2>
+					<p>{{address}},{{posLat}},{{posLong}}</p>
 				</div>
 			</div>
 		</div>
@@ -41,9 +41,9 @@
 			<input type="text" class='input' placeholder='请描述其他违法行为'>
 			<label class='label'>上传照片</label>
 			<div class='uppic'>
-				<img ng-src="img/PNG/cab.png" alt="">
-				<img ng-src="img/PNG/cab.png" alt="">
-				<img ng-src="img/PNG/cab.png" alt="">
+				<img ng-src="{{img.i1}}" ng-click='getpic($event,"i1")' alt="">
+				<img ng-src="{{img.i2}}" ng-click='getpic($event,"i2")' alt="">
+				<img ng-src="{{img.i3}}" ng-click='getpic($event,"i3")' alt="">
 			</div>
 		</div>
 	</ion-content>

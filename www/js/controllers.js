@@ -219,11 +219,35 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 
 
 //随手拍-一键上传
-.controller('paiShangchuanCtrl', function($scope,$state,$rootScope,$timeout,$cordovaToast){
+.controller('paiShangchuanCtrl', function($scope,$state,$rootScope,$timeout,$cordovaToast,$cordovaGeolocation,$ionicPopup,$ionicLoading,$cordovaCamera,ionicToast){
 
-  $scope.address = '山水铂宫';
-  $scope.remoteTime = new Date();     
+  $scope.address = '北京';
+  $scope.remoteTime = new Date();    
   
+  $scope.getGps = function(){
+    $cordovaGeolocation.getCurrentPosition({
+      timeout: 10000, 
+      enableHighAccuracy: false
+    }).then(function (position) {
+        var lat  = position.coords.latitude
+        var long = position.coords.longitude
+        //$cordovaToast.show(lat+','+long, 'long', 'bottom')
+        $rootScope.posLat = lat;
+        $rootScope.posLong = long;
+        //console.log(position)
+
+        var point = new BMap.Point(long,lat);
+        var geoc = new BMap.Geocoder();
+        geoc.getLocation(point,function(res){
+          console.log(res)
+          $scope.address = res.addressComponents;
+        })
+
+      }, function(err) {
+        // error
+        $cordovaToast.show(JSON.stringify(err), 'short', 'bottom')
+    });    
+  }
   
   //$cordovaToast.show($rootScope.posLong+','+$rootScope.posLat, 'long', 'center')
   
@@ -244,6 +268,73 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
       {checked:false,code:8,name:'违反标志标线'},
       {checked:false,code:9,name:'滥用远光灯'}
   ];
+
+  $scope.img = {
+    'i1':'img/PNG/cab.png',
+    'i2':'img/PNG/cab.png',
+    'i3':'img/PNG/cab.png'
+  }
+
+   $scope.getpic = function($event,img){
+      console.log(img)
+      document.addEventListener("deviceready", function () {
+        var options = {
+          quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 158,
+          targetHeight: 120,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false,
+          correctOrientation:true
+        };
+
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+          switch(img){
+            case 'i1':
+              $scope.img.i1 = "data:image/jpeg;base64," + imageData;
+              break;
+            case 'i2':
+              $scope.img.i2 = "data:image/jpeg;base64," + imageData;
+              break;                            
+            case 'i3':
+              $scope.img.i3 = "data:image/jpeg;base64," + imageData;
+              break;                         
+          }
+        }, function(err) {
+          // error
+        });
+      }, false);
+    
+   }
+
+   $scope.submit = function(){
+       var confirmPopup = $ionicPopup.confirm({
+         title: '确定提交吗？',
+         template: '提交的信息将上传到系统中'
+       });
+
+       confirmPopup.then(function(res) {
+         if(res) {
+            $ionicLoading.show({template: '请稍后...'});
+            $timeout(function(){
+                $scope.img = {
+                  "i1": "img/PNG/cab.png",
+                  "i2": "img/PNG/cab.png",
+                  "i3": "img/PNG/cab.png"
+                }      
+            },500).then(function(){
+              ionicToast.show('信息已经保存到服务器', 'middle', false, 2500)
+              $ionicLoading.hide();               
+            })
+         } else {
+            // ionicToast.show('取消保存', 'middle', false, 2500)
+         }
+       });       
+   }   
+
 
   //日期控件
   var weekDaysList = ["日", "一", "二", "三", "四", "五", "六"];
