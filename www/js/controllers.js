@@ -223,33 +223,60 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 
   $scope.address = '北京';
   $scope.remoteTime = new Date();    
-  
-  $scope.getGps = function(){
-    $cordovaGeolocation.getCurrentPosition({
-      timeout: 10000, 
-      enableHighAccuracy: false
-    }).then(function (position) {
-        var lat  = position.coords.latitude
-        var long = position.coords.longitude
-        //$cordovaToast.show(lat+','+long, 'long', 'bottom')
-        $rootScope.posLat = lat;
-        $rootScope.posLong = long;
-        //console.log(position)
+  $scope.map = new BMap.Map("bmap");
+  //导航控件
+  var navigationControl = new BMap.NavigationControl({
+    // 靠左上角位置
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    // LARGE类型
+    type: BMAP_NAVIGATION_CONTROL_LARGE,
+    // 启用显示定位
+    enableGeolocation: true
+  });
+  $scope.map.addControl(navigationControl);    
 
-        var point = new BMap.Point(long,lat);
-        var geoc = new BMap.Geocoder();
-        geoc.getLocation(point,function(res){
-          console.log(res)
-          $scope.address = res.addressComponents;
-        })
+  var long = 116.447486;
+  var lat = 39.925425;
+  $scope.map.centerAndZoom(new BMap.Point(long,lat),18);
+  $scope.map.enableScrollWheelZoom(true);  
+  $scope.map.addOverlay(new BMap.Marker(new BMap.Point(long,lat)))
+  $scope.map.addEventListener('click',function(e){
+    console.log(e)
+    $scope.map.clearOverlays();   //清除覆盖物    
+    $scope.map.addOverlay(
+      new BMap.Marker(new BMap.Point(e.point.lng,e.point.lat))
+    )
+  })
 
-      }, function(err) {
-        // error
-        $cordovaToast.show(JSON.stringify(err), 'short', 'bottom')
-    });    
-  }
+
+    $scope.getGps = function(){
+      getGps()
+    }
+
+    getGps();
+
+    function getGps(){
+      $cordovaGeolocation.getCurrentPosition({
+        timeout: 10000, 
+        enableHighAccuracy: false
+      }).then(function (position) {
+          var lat  = position.coords.latitude
+          var long = position.coords.longitude
+
+          var point = new BMap.Point(long,lat);
+          var geoc = new BMap.Geocoder();
+          geoc.getLocation(point,function(res){
+            console.log(res)
+            $scope.address = res.address;
+          })
+
+        }, function(err) {
+          // error
+          console.log(err)
+          //$cordovaToast.show(JSON.stringify(err), 'short', 'bottom')
+      }); 
+    }
   
-  //$cordovaToast.show($rootScope.posLong+','+$rootScope.posLat, 'long', 'center')
   
   $scope.cars = [
     {name:'小型车辆'},
@@ -411,6 +438,12 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 })
 
 
+
+
+//区域互动
+.controller('qyhdCtrl', function($scope,$state){
+  
+})
 
 //单车事故处理
 .controller('sgclsCtrl', function($scope,$state,$ionicPopup,$ionicLoading,$timeout,$cordovaCamera,ionicToast){

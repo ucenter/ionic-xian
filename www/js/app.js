@@ -64,12 +64,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
         var lat  = position.coords.latitude
         var long = position.coords.longitude
-        //$cordovaToast.show(lat+','+long, 'long', 'bottom')
         $rootScope.posLat = lat;
         $rootScope.posLong = long;
         console.log(position)
       }, function(err) {
         // error
+        console.log(err)
         $cordovaToast.show(JSON.stringify(err), 'short', 'bottom')
     });
     var watchOptions = {
@@ -79,7 +79,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     var watch = $cordovaGeolocation.watchPosition(watchOptions);
     watch.then(null,function(err) {
         // error
-        $cordovaToast.show(JSON.stringify(err),'short','bottom')
+        console.log(err)
+        //$cordovaToast.show(JSON.stringify(err),'short','bottom')
       },function(position) {
         var lat  = position.coords.latitude
         var long = position.coords.longitude
@@ -90,7 +91,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 
 
-    checkUpdate();
+    //checkUpdate();
 
     // 检查更新
     function checkUpdate() {
@@ -186,42 +187,60 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     templateUrl:'templates/pai-home.html',
     controller:'paiHomeCtrl'
   })
+
+  //随手拍巡查
   .state('paixuncha', {
     url: '/paixuncha',
     templateUrl: 'templates/pai-xuncha.html',
     controller: 'paiXunchaCtrl'
   })
+
+  //随手拍-举报
   .state('paijubao', {
     url: '/paijubao',
     templateUrl: 'templates/pai-jubao.html',
     controller: 'paiJubaoCtrl'
   })
+
+  //随手拍-上传
   .state('paishangchuan',{
     url:'/paishangchuan',
     templateUrl:'templates/pai-shangchuan.html',
     controller:'paiShangchuanCtrl'
   })  
+
+  //随手拍-历史
   .state('pailishi',{
     url:'/pailishi',
     templateUrl:'templates/pai-lishi.html',
     controller:'paiLishiCtrl'
   })
+  //事故处理-首页
   .state('shiguchuli',{
     url: '/shiguchuli',
     templateUrl: 'templates/shiguchuli.html',
     controller: 'shiguchuliCtrl'
   })
+
+  //事故处理-单车
   .state('sgcls',{
     url: '/sgcls',
     templateUrl: 'templates/shiguchuli-single.html',
     controller: 'sgclsCtrl'
   })
+
+  //事故处理-多车
   .state('sgclm',{
     url: '/sgclm',
     templateUrl: 'templates/shiguchuli-multi.html',
     controller: 'sgclmCtrl'
   })
-
+  //区域互动
+  .state('qyhd',{
+    url: '/qyhd',
+    templateUrl: 'templates/qyhd.html',
+    controller: 'qyhdCtrl'
+  })
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
