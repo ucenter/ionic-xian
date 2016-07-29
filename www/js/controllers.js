@@ -209,7 +209,9 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 
 //随手拍-违法举报
 .controller('paiJubaoCtrl', ['$scope', function($scope){
-  
+    $scope.img1 = 'img/PNG/file-image-o.png';
+    $scope.img2 = 'img/PNG/file-image-o.png';
+    $scope.img3 = 'img/PNG/file-image-o.png';  
 }])
 
 

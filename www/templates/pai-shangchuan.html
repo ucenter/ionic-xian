@@ -44,9 +44,15 @@
 			<input type="text" class='input' placeholder='请描述其他违法行为'>
 			<label class='label'>上传照片</label>
 			<div class='uppic'>
-				<img ng-src="{{img.i1}}" ng-click='getpic($event,"i1")' alt="">
-				<img ng-src="{{img.i2}}" ng-click='getpic($event,"i2")' alt="">
-				<img ng-src="{{img.i3}}" ng-click='getpic($event,"i3")' alt="">
+				<a ng-click='getpic($event,"i1")' >
+					<img ng-src="{{img.i1}}" alt="">
+				</a>
+				<a ng-click='getpic($event,"i2")'>
+					<img ng-src="{{img.i2}}" alt="">
+				</a>
+				<a ng-click='getpic($event,"i3")'>
+					<img ng-src="{{img.i3}}"  alt="">
+				</a>
 			</div>
 		</div>
 	</ion-content>
