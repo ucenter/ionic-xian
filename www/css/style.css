@@ -62,11 +62,11 @@ div.rn-carousel-indicator span.active{color:#fff}
 .gridView .item-2{width: 50%;float: left;position: relative;box-sizing:border-box;padding: 20px 10px;}
 .gridView .item-3{width: 33.33%;float: left;position: relative;padding: 20px 10px;}
 
-.gridView i{font-size: 30px;}
+.gridView i{font-size: 30px;font-weight: bold;}
 .gridView .item-2:first-child i{color:#B26C4C;}
 .gridView .item-2 i{color:#FFCEB7;}
-.gridView .item-3:first-child i{color:#FFAC86;}
-.gridView .item-3 i{color:#3AB2A6;}
+.gridView .item-3:first-child i{color:#3AB2A6;}
+.gridView .item-3 i{color:#FFAC86;}
 .gridView .item-3:last-child i{color:#D3FFFA;}
 
 .gridView:before{
