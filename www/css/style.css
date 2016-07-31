@@ -1,4 +1,6 @@
 /* Empty. Add your own CSS if you like */
+@import url("icomoon.css");
+
 a{color: #333;text-decoration: none;}
 a.link{}
 img{max-width: 100%;height: auto;}
@@ -59,6 +61,13 @@ div.rn-carousel-indicator span.active{color:#fff}
 .gridView{  text-align: center;position: relative;font-size: 25px;}
 .gridView .item-2{width: 50%;float: left;position: relative;box-sizing:border-box;padding: 20px 10px;}
 .gridView .item-3{width: 33.33%;float: left;position: relative;padding: 20px 10px;}
+
+.gridView i{font-size: 30px;}
+.gridView .item-2:first-child i{color:#B26C4C;}
+.gridView .item-2 i{color:#FFCEB7;}
+.gridView .item-3:first-child i{color:#FFAC86;}
+.gridView .item-3 i{color:#3AB2A6;}
+.gridView .item-3:last-child i{color:#D3FFFA;}
 
 .gridView:before{
     content: " ";
@@ -137,7 +146,8 @@ div.rn-carousel-indicator span.active{color:#fff}
     width: 56px;height: 56px;border-radius: 50%;margin-top: 40px;clear: both;
 }
 
-.weather{font-size: 10px;height: 50px;position: relative;overflow: hidden;}
+
+.weather{font-size: 10px;height: 50px;position: relative;overflow: hidden;border-radius: 0;}
 .weather p{margin: 0;line-height: 20px;}
 .weather img{
     padding: 5px;margin-top: 4px; float: left;
@@ -147,8 +157,19 @@ div.rn-carousel-indicator span.active{color:#fff}
     text-align: left;position: absolute;left: 60px;top:4px;
 }
 
+/*.index-btn{
+    margin:0;position:relative;padding:0;border-radius: 0;color:#fff;
+}
+.index-btn:after{
+    content:'';position:relative;width:100%;display:block;
 
+}
+.index-btn.left:first-child{margin:0;}
+.index-btn.right:after{}
+.index-btn.right{}
+.index-btn.right:last-child{margin: 0;}
 
+*/
 /*一键上传*/
 .uppic{padding: 10px 0;}
 .uppic > a{background-color: #eee;padding: 4px; border-radius: 5px;margin-right: 8px;display: inline-block;min-width: 40px;max-width: 30%;}
