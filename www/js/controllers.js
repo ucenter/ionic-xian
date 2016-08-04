@@ -230,7 +230,7 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
   // 如果有网络才能引入地图api
   if (window.BMap) {
       $scope.map = new BMap.Map("bmap");   
-
+      var geoc = new BMap.Geocoder();//地址解析
       $scope.map.addControl(new BMap.NavigationControl());    
       //默认地址
       var long = 116.447486;
@@ -245,6 +245,10 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
           //console.log('地图中心：'+center.lng+ ','+center.lat)
           $scope.map.clearOverlays();
           $scope.map.addOverlay(new BMap.Marker(new BMap.Point(center.lng,center.lat)))          
+          geoc.getLocation(center,function(res){
+            console.log(res)
+            $scope.address = res.address;
+          })           
       })
       
   }    
@@ -286,7 +290,7 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
               var marker = new BMap.Marker(data.points[0]);
               $scope.map.addOverlay(marker);
               $scope.map.setCenter(data.points[0]);
-              var geoc = new BMap.Geocoder();
+              
               geoc.getLocation(data.points[0],function(res){
                 console.log(res)
                 $scope.address = res.address;
