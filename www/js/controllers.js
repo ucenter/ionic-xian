@@ -3,7 +3,8 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 .controller('homeCtrl', function($scope,$state,$cordovaDialogs) {
     $scope.slides = [
         {'img': './img/slide-1.jpg'},
-        {'img': './img/slide-2.jpg'}
+        {'img': './img/slide-2.jpg'},
+        {'img': './img/slide-3.jpg'}
     ]
     // $scope.doRefresh = function(){
     //   $state.reload().then(function(){
@@ -224,33 +225,40 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 .controller('paiShangchuanCtrl', function($scope,$state,$rootScope,$timeout,$cordovaToast,$cordovaGeolocation,$ionicPopup,$ionicLoading,$cordovaCamera,ionicToast){
 
   $scope.address = '北京';
-  $scope.remoteTime = new Date();    
-  $scope.map = new BMap.Map("bmap");
-  //导航控件
-  var navigationControl = new BMap.NavigationControl({
-    // 靠左上角位置
-    anchor: BMAP_ANCHOR_TOP_LEFT,
-    // LARGE类型
-    type: BMAP_NAVIGATION_CONTROL_LARGE,
-    // 启用显示定位
-    enableGeolocation: true
-  });
-  $scope.map.addControl(navigationControl);    
+  $scope.remoteTime = new Date();
 
-  var long = 116.447486;
-  var lat = 39.925425;
-  $scope.map.centerAndZoom(new BMap.Point(long,lat),18);
-  $scope.map.enableScrollWheelZoom(true);  
-  $scope.map.addOverlay(new BMap.Marker(new BMap.Point(long,lat)))
-  $scope.map.addEventListener('click',function(e){
-    console.log(e)
-    $scope.map.clearOverlays();   //清除覆盖物    
-    $scope.map.addOverlay(
-      new BMap.Marker(new BMap.Point(e.point.lng,e.point.lat))
-    )
-  })
+  // 如果有网络才能引入地图api
+  if (window.BMap) {
+      $scope.map = new BMap.Map("bmap");   
 
+      $scope.map.addControl(new BMap.NavigationControl());    
+      //默认地址
+      var long = 116.447486;
+      var lat = 39.925425;
+      $scope.map.centerAndZoom(new BMap.Point(long,lat),18);
+      //$scope.map.enableScrollWheelZoom(true);  
+      $scope.map.addOverlay(new BMap.Marker(new BMap.Point(long,lat)))
+      
+      //监听地图移动改变中心点
+      $scope.map.addEventListener('dragend',function(){
+          var center = $scope.map.getCenter();
+          //console.log('地图中心：'+center.lng+ ','+center.lat)
+          $scope.map.clearOverlays();
+          $scope.map.addOverlay(new BMap.Marker(new BMap.Point(center.lng,center.lat)))          
+      })
+      
+  }    
 
+    //坐标转换
+    var translateCallback = function (data){
+      console.log(data)
+      if(data.status === 0) {
+        var marker = new BMap.Marker(data.points[0]);
+        $scope.map.addOverlay(marker);
+        $scope.map.setCenter(data.points[0]);
+      }
+    }
+ 
     $scope.getGps = function(){
       getGps()
     }
@@ -262,15 +270,31 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
         timeout: 10000, 
         enableHighAccuracy: false
       }).then(function (position) {
+          console.log(position)
+          //gps原始坐标
           var lat  = position.coords.latitude
           var long = position.coords.longitude
 
           var point = new BMap.Point(long,lat);
-          var geoc = new BMap.Geocoder();
-          geoc.getLocation(point,function(res){
-            console.log(res)
-            $scope.address = res.address;
+          //坐标转换操作
+          var convertor = new BMap.Convertor();
+          var pointArr = [];
+          pointArr.push(point);
+          convertor.translate(pointArr, 1, 5, function(data){
+            console.log(data)
+            if(data.status === 0) {
+              var marker = new BMap.Marker(data.points[0]);
+              $scope.map.addOverlay(marker);
+              $scope.map.setCenter(data.points[0]);
+              var geoc = new BMap.Geocoder();
+              geoc.getLocation(data.points[0],function(res){
+                console.log(res)
+                $scope.address = res.address;
+              })              
+            }            
           })
+
+
 
         }, function(err) {
           // error
