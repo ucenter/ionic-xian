@@ -288,6 +288,7 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
             console.log(data)
             if(data.status === 0) {
               var marker = new BMap.Marker(data.points[0]);
+              $scope.map.clearOverlays();
               $scope.map.addOverlay(marker);
               $scope.map.setCenter(data.points[0]);
               
