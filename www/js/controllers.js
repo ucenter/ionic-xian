@@ -2,8 +2,8 @@ angular.module('starter.controllers', ['angular-carousel','ionic-toast'])
 
 .controller('homeCtrl', function($scope,$state,$cordovaDialogs) {
     $scope.slides = [
-        {'img': './img/slide-1.jpg'},
         {'img': './img/slide-2.jpg'},
+        {'img': './img/slide-1.jpg'},
         {'img': './img/slide-3.jpg'}
     ]
     // $scope.doRefresh = function(){
